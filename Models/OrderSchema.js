@@ -13,6 +13,18 @@ const OrderSchema = new mongoose.Schema({
         type:String,
         enum:["Cash","Card Payment"]
     },
+    orderquantity:[
+        {
+       product:  {
+            type:String,
+    
+        },
+        
+        quantity:{
+        type:Number
+        }
+    }
+    ],
     products:[
         {
             type:mongoose.Schema.ObjectId,

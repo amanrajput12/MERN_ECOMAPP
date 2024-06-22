@@ -3,7 +3,8 @@ import { Order } from "../Models/OrderSchema.js";
 
 export const CreateOrder = async function(req,res){
     try {
-        const {user,address,paymentMethod,products}= req.body
+        const {user,address,paymentMethod,products,orderquantity}= req.body
+        console.log(user,address,paymentMethod,products,orderquantity);
         if(!(user,address,paymentMethod,products)){
             return res.status(400).json({
                 sucess:false,
@@ -14,7 +15,8 @@ export const CreateOrder = async function(req,res){
             user,
             address,
             paymentMethod,
-            products
+            products,
+            orderquantity
         })
         res.status(201).json({
             sucess:true,

@@ -43,17 +43,27 @@ export const getCart= async function(req,res){
         const {user}= req.body
         console.log("user value are",user);
         const response = await Cart.find({user}).populate('product')
+        let totalAmount =0
+        if(response){
+            response.map((data)=>{
+                let discount = (data.product.discountPercentage*data.product.price*data.quantity)/100
+                console.log("amount",data.product.price*data.quantity,"discount",discount,"quantity",data.quantity);
+                totalAmount = totalAmount+ ((data.product.price*data.quantity)-discount)
+            })
+            console.log("CartAmout",totalAmount);
+        }
         if(!response){
             return res.status(400).json({
                 sucess:false,
                 message:"No data in the cart",
             })
         }
-        console.log("resopnse in get cart",response);
+        // console.log("resopnse in get cart",response);
         res.status(200).json({
             sucess:true,
             message:"All data of the cart",
-            data:response
+            data:response,
+            Amount:totalAmount
         })
     } catch (error) {
         console.log("error on getting the cartdata",);
