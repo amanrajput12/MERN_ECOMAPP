@@ -7,6 +7,7 @@ import cookieparser from "cookie-parser";
 import bodyParser from "body-parser";
 import { CartRouter } from "./Router/CartRouter.js";
 import { AddressRouter } from "./Router/AddressRouter.js";
+import { OrderRouter } from "./Router/OrderRouter.js";
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ app.use(cookieparser());
 app.use("/v1/product", ProductRoute);
 app.use('/v1/user', UserRouter);
 app.use('/v1/proudctdetail',CartRouter)
-app.use('/v1/address',AddressRouter)
+app.use('/v1/address',AddressRouter),
+app.use('/v1/order',OrderRouter)
 
 connectDb();
 

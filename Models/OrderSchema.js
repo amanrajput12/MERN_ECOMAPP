@@ -6,7 +6,8 @@ const OrderSchema = new mongoose.Schema({
         ref:"User"
     },
     address:{
-      type:mongoose.Schema.ObjectId   
+      type:mongoose.Schema.ObjectId ,  
+      ref:"Address"
     },
     paymentMethod:{
         type:String,
