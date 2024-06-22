@@ -81,6 +81,11 @@ export const Login = async function(req,res){
          
             maxAge: 2 * 60 * 60 * 1000 // 2 hours
         });
+        const cartId = String(validUser._id)
+        console.log("id of login",cartId.split("'")[0],typeof(cartId));
+        res.cookie('user',cartId.split("'")[0],{
+            maxAge: 2 * 60 * 60 * 1000
+        })
         validUser.token = token
         await validUser.save()
         
@@ -90,7 +95,8 @@ export const Login = async function(req,res){
         res.status(200).json({
             sucess:true,
             message:"user login sucess",
-            data:validUser
+            data:validUser,
+            cartId:validUser._id
         })
     
     
