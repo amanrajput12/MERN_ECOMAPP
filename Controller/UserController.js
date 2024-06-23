@@ -79,7 +79,7 @@ export const Login = async function(req,res){
         )
         res.cookie('token', token, {
          
-            maxAge: 2 * 60 * 60 * 1000 , // 2 hours
+            expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
             httpOnly: true,
             sameSite: 'None',
             secure: true 
@@ -87,7 +87,10 @@ export const Login = async function(req,res){
         const cartId = String(validUser._id)
         console.log("id of login",cartId.split("'")[0],typeof(cartId));
         res.cookie('user',cartId.split("'")[0],{
-            maxAge: 2 * 60 * 60 * 1000
+            expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true 
         })
         validUser.token = token
         await validUser.save()
