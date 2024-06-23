@@ -77,9 +77,12 @@ export const Login = async function(req,res){
                     expiresIn:'2h'
                 }
         )
-        res.cookie('token', token, {
+        res.cookies('token', token, {
          
-            maxAge: 2 * 60 * 60 * 1000 // 2 hours
+            maxAge: 2 * 60 * 60 * 1000 , // 2 hours
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true 
         });
         const cartId = String(validUser._id)
         console.log("id of login",cartId.split("'")[0],typeof(cartId));
