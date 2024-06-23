@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-
+import cors from "cors"
 import express from "express";
 import connectDb from "./Db/database.js";
 import { ProductRoute } from "./Router/ProductRouter.js";
@@ -16,6 +16,7 @@ import { PaymentRouter } from "./Router/PaymentRouter.js";
 const app = express();
 const port = process.env.PORT || 4000; // 
 dotenv.config();
+app.use(cors())
 console.log(process.env.key_Id);
 app.use(express.json());
 app.use(express.static('Public'))
