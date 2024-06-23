@@ -16,10 +16,7 @@ import { PaymentRouter } from "./Router/PaymentRouter.js";
 const app = express();
 const port = process.env.PORT ||8000 ; // 
 dotenv.config();
-app.use(cors({
-  origin: 'https://onlineecomapp.netlify.app', // Replace with your frontend's domain
-  credentials: true
-}));
+app.use(cors());
 console.log(process.env.key_Id);
 app.use(express.json());
 app.use(express.static('Public'))
