@@ -3,7 +3,8 @@ import { Order } from "../Models/OrderSchema.js";
 
 export const CreateOrder = async function(req,res){
     try {
-        const {user,address,paymentMethod,products,orderquantity}= req.body
+        const {address,paymentMethod,products,orderquantity}= req.body
+        const {user} = req.headers
         console.log("req header for cookies",req.Cookie);
         console.log(user,address,paymentMethod,products,orderquantity);
         if(!(user,address,paymentMethod,products)){
@@ -38,7 +39,7 @@ export const CreateOrder = async function(req,res){
 
 export const GetOrders = async function(req,res){
     try {
-        const {user}= req.body
+        const {user}= req.headers
         console.log("req header for cookies",req.Cookie);
         if(!user){
             return res.status(400).json({

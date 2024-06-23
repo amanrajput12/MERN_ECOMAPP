@@ -41,8 +41,8 @@ export const addtoCart = async function(req,res){
 export const getCart= async function(req,res){
   
     try {
-        const {user}= req.body
-        console.log("req header for cookies",req.Cookie);
+        const {user}= req.headres
+        console.log("req header for cookies",req.headres);
         console.log("user value are",user);
         const response = await Cart.find({user}).populate('product')
         let totalAmount =0
@@ -103,7 +103,8 @@ export const changeQuantity = async function(req,res){
 
 export const removetoCart = async function(req,res){
     try {
-        const {product,user}= req.body
+        const {product}= req.body
+        const {user} = req.headres
         if(!(product,user)){
             return res.status(400).json({
                 sucess:false,

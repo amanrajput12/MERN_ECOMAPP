@@ -4,7 +4,7 @@ import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 export const  addProduct =  async function(req,res){
     try {
         const {title,price,category,description,rating,discountPercentage}= req.body
-        console.log("req header for cookies",req.Cookie);
+        console.log("req header for cookies",req.headers);
         // console.log("files",req.files);
         console.log("in the body",title,price,category,req.body,);
         if(!(title,price,category,req.files)) {
@@ -46,7 +46,7 @@ export const  addProduct =  async function(req,res){
 
 export const getProduct = async function(req,res){
     try {
-        console.log("req header for cookies",req.Cookie,req.header);
+        console.log("req header for cookies",req.headers,req.headers.token);
         const data = await Product.find()
         res.status(200).json({
             sucess:true,
