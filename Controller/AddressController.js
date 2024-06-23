@@ -6,7 +6,14 @@ export const CreateAddress = async function(req,res){
 try {
     console.log("req header for cookies",req.Cookie);
     const {fullName,email,phone,street,city,state,postalcode}= req.body
-    const {user} = req.headers
+   
+    const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+    console.log("Split cookies:", cookies);
+    const specificCookie = cookies.find(cookie => cookie.includes('user'));
+    const value = specificCookie.split('=')
+    
+    const user = value[1]
+    console.log("user",value[1]);
    if(!(fullName,email,phone,street,city,state,postalcode,user)){
     return res.status(400).json({
         sucess:false,
@@ -45,8 +52,15 @@ try {
 
 export const GetAddress = async function(req,res){
     try {
-        const {user}= req.headers
-        console.log("req header for cookies",req.headers);
+        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+    console.log("Split cookies:", cookies);
+    const specificCookie = cookies.find(cookie => cookie.includes('user'));
+    const value = specificCookie.split('=')
+    
+    const user = value[1]
+    console.log("user",value[1]);
+
+        // console.log("req header for cookies",req.headers);
         if(!user){
           return  res.status(400).json({
                 sucess:false,

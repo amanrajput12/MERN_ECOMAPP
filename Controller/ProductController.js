@@ -46,7 +46,8 @@ export const  addProduct =  async function(req,res){
 
 export const getProduct = async function(req,res){
     try {
-        console.log("req header for cookies",req.headers,req.headers.token);
+       
+        console.log("req header for cookies",req.headers.cookie,req.headers.token);
         const data = await Product.find()
         res.status(200).json({
             sucess:true,

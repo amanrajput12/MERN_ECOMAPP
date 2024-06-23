@@ -24,8 +24,16 @@ const razorpay = new Razorpay({
 // // checkout
 export const checkout = async function(req,res){
     try {
-        const {amount,cartItems,userShipping,userId} = req.body
-        console.log("req header for cookies",req.Cookie);
+        const {amount,cartItems,userShipping} = req.body
+        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+        console.log("Split cookies:", cookies);
+        const specificCookie = cookies.find(cookie => cookie.includes('user'));
+        const value = specificCookie.split('=')
+        
+        const userId = value[1]
+        console.log("user",value[1]);
+
+        // console.log("req header for cookies",req.Cookie);
 
         var options = {
             amount: amount*100,  // amount in the smallest currency unit
@@ -59,8 +67,16 @@ export const verify = async function(req,res){
             signature,
             amount,
             cartItems,
-            userId,
+            
             userShipping} = req.body
+
+            const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+            console.log("Split cookies:", cookies);
+            const specificCookie = cookies.find(cookie => cookie.includes('user'));
+            const value = specificCookie.split('=')
+            
+            const userId = value[1]
+            console.log("user",value[1]);
     
             let orderconfirm = await Payment.create({
                 orderId,
