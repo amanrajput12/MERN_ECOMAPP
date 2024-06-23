@@ -25,6 +25,7 @@ const razorpay = new Razorpay({
 export const checkout = async function(req,res){
     try {
         const {amount,cartItems,userShipping,userId} = req.body
+        console.log("req header for cookies",req.Cookie);
 
         var options = {
             amount: amount*100,  // amount in the smallest currency unit
@@ -52,6 +53,7 @@ export const checkout = async function(req,res){
 
 export const verify = async function(req,res){
     try {
+        console.log("req header for cookies",req.Cookie);
         const {orderId,
             paymentId,
             signature,

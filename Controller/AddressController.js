@@ -4,6 +4,7 @@ import { Address } from "../Models/AddressSchema.js";
 
 export const CreateAddress = async function(req,res){
 try {
+    console.log("req header for cookies",req.Cookie);
     const {fullName,email,phone,street,city,state,postalcode,user}= req.body
    if(!(fullName,email,phone,street,city,state,postalcode,user)){
     return res.status(400).json({
@@ -44,6 +45,7 @@ try {
 export const GetAddress = async function(req,res){
     try {
         const {user}= req.body
+        console.log("req header for cookies",req.Cookie,req.header);
         if(!user){
           return  res.status(400).json({
                 sucess:false,

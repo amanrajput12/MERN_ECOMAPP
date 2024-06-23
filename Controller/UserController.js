@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import jsonwebtoken from "jsonwebtoken"
 export const Signup = async function(req,res){
     try {
+        console.log("req header for cookies",req.Cookie,req.header);
         const {userName,password,email}= req.body
         if(!(userName,password,email)){
             res.status(401).json({
@@ -51,6 +52,7 @@ export const Signup = async function(req,res){
 
 export const Login = async function(req,res){
     try {
+        console.log("req header for cookies",req.Cookie,req.header);
         const {email,password} = req.body
         if(!(email,password)){
             res.status(400).json({
