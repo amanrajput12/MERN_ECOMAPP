@@ -81,7 +81,7 @@ export const Login = async function(req,res){
          
             expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
           
-            sameSite: 'None',
+            
             secure: true 
         });
         const cartId = String(validUser._id)
@@ -89,7 +89,7 @@ export const Login = async function(req,res){
         res.cookie('user',cartId.split("'")[0],{
             expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
           
-            sameSite: 'None',
+          
             secure: true 
         })
         validUser.token = token
