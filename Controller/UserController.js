@@ -77,7 +77,7 @@ export const Login = async function(req,res){
                     expiresIn:'2h'
                 }
         )
-        res.cookies('token', token, {
+        res.cookie('token', token, {
          
             maxAge: 2 * 60 * 60 * 1000 , // 2 hours
             httpOnly: true,
