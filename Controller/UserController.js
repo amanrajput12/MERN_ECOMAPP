@@ -80,17 +80,15 @@ export const Login = async function(req,res){
         res.cookie('token', token, {
          
             expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
-          
-            
-            secure: true 
+          secure: true ,
+         sameSite:'None'
         });
         const cartId = String(validUser._id)
         console.log("id of login",cartId.split("'")[0],typeof(cartId));
         res.cookie('user',cartId.split("'")[0],{
             expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
-          
-          
-            secure: true 
+        secure: true ,
+        sameSite:'None'
         })
         validUser.token = token
         await validUser.save()

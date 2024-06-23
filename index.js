@@ -18,13 +18,18 @@ const port = process.env.PORT ||8000 ; //
 dotenv.config();
 app.use(cors({
   origin: 'https://onlineecomapp.netlify.app', // Replace with your frontend's domain
-  
+  credentials: true
 }));
 console.log(process.env.key_Id);
 app.use(express.json());
 app.use(express.static('Public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 app.use("/v1/product", ProductRoute);
 app.use('/v1/user', UserRouter);
