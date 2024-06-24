@@ -5,15 +5,9 @@ import { Address } from "../Models/AddressSchema.js";
 export const CreateAddress = async function(req,res){
 try {
     console.log("req header for cookies",req.Cookie);
-    const {fullName,email,phone,street,city,state,postalcode}= req.body
+    const {fullName,email,phone,street,city,state,postalcode,user}= req.body
    
-    const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-    console.log("Split cookies:", cookies);
-    const specificCookie = cookies.find(cookie => cookie.includes('user'));
-    const value = specificCookie.split('=')
     
-    const user = value[1]
-    console.log("user",value[1]);
    if(!(fullName,email,phone,street,city,state,postalcode,user)){
     return res.status(400).json({
         sucess:false,
@@ -52,13 +46,10 @@ try {
 
 export const GetAddress = async function(req,res){
     try {
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-    console.log("Split cookies:", cookies);
-    const specificCookie = cookies.find(cookie => cookie.includes('user'));
-    const value = specificCookie.split('=')
+       
     
-    const user = value[1]
-    console.log("user",value[1]);
+    const {user} = req.body
+   
 
         // console.log("req header for cookies",req.headers);
         if(!user){

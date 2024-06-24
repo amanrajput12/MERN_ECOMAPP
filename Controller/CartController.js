@@ -2,15 +2,8 @@ import { Cart } from "../Models/CartSchema.js";
 export const addtoCart = async function(req,res){
     try {
         
-        const {product,quantity}= req.body
+        const {product,quantity,user}= req.body
 
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-        console.log("Split cookies:", cookies);
-        const specificCookie = cookies.find(cookie => cookie.includes('user'));
-        const value = specificCookie.split('=')
-        
-        const user = value[1]
-        console.log("user",value[1]);
 
         // console.log("req header for cookies",req.Cookies);
         if(!(user,product,quantity)){
@@ -51,13 +44,10 @@ export const getCart= async function(req,res){
   
     try {
        
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-        console.log("Split cookies:", cookies);
-        const specificCookie = cookies.find(cookie => cookie.includes('user'));
-        const value = specificCookie.split('=')
+   
         
-        const user = value[1]
-        console.log("user",value[1]);
+        const {user} = req.body
+       
 
         console.log("req header for cookies",req.headres);
         console.log("user value are",user);
@@ -91,15 +81,9 @@ export const getCart= async function(req,res){
 
 export const changeQuantity = async function(req,res){
     try {
-        const {quantity,product}= req.body
+        const {quantity,product,user}= req.body
 
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-        console.log("Split cookies:", cookies);
-        const specificCookie = cookies.find(cookie => cookie.includes('user'));
-        const value = specificCookie.split('=')
-        
-        const user = value[1]
-        console.log("user",value[1]);
+      
 
         console.log("quantity",quantity,product);
         if(!(quantity,product)){
@@ -129,14 +113,8 @@ export const changeQuantity = async function(req,res){
 
 export const removetoCart = async function(req,res){
     try {
-        const {product}= req.body
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-    console.log("Split cookies:", cookies);
-    const specificCookie = cookies.find(cookie => cookie.includes('user'));
-    const value = specificCookie.split('=')
-    
-    const user = value[1]
-    console.log("user",value[1]);
+        const {product,user}= req.body
+  
     
         if(!(product,user)){
             return res.status(400).json({

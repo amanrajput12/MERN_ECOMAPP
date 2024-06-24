@@ -3,15 +3,9 @@ import { Order } from "../Models/OrderSchema.js";
 
 export const CreateOrder = async function(req,res){
     try {
-        const {address,paymentMethod,products,orderquantity}= req.body
+        const {address,paymentMethod,products,orderquantity,user}= req.body
        
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-        console.log("Split cookies:", cookies);
-        const specificCookie = cookies.find(cookie => cookie.includes('user'));
-        const value = specificCookie.split('=')
-        
-        const user = value[1]
-        console.log("user",value[1]);
+       
 
         //  console.log("req header for cookies",req.Cookie);
 
@@ -49,13 +43,9 @@ export const CreateOrder = async function(req,res){
 export const GetOrders = async function(req,res){
     try {
       
-        const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
-        console.log("Split cookies:", cookies);
-        const specificCookie = cookies.find(cookie => cookie.includes('user'));
-        const value = specificCookie.split('=')
-        
-        const user = value[1]
-        console.log("user",value[1]);
+       
+        const {user} = req.body
+    
 
         // console.log("req header for cookies",req.Cookie);
         if(!user){
