@@ -1,6 +1,6 @@
 import { User } from "../Models/LoginSchema.js";
 import bcrypt from "bcrypt"
-import Cookies from "js-cookie"
+
 import jsonwebtoken from "jsonwebtoken"
 export const Signup = async function(req,res){
     try {
@@ -80,19 +80,8 @@ export const Login = async function(req,res){
                     expiresIn:'2h'
                 }
         )
-        res.Cookies('token', token, {
-         
-            expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
-          secure: true ,
-         sameSite:'None'
-        });
-        const cartId = String(validUser._id)
-        console.log("id of login",cartId.split("'")[0],typeof(cartId));
-        res.Cookies('user',cartId.split("'")[0],{
-            expires: new Date(Date.now()+ 2 * 60 * 60 * 1000) , // 2 hours
-        secure: true ,
-        sameSite:'None'
-        })
+       
+     
         validUser.token = token
         await validUser.save()
         
