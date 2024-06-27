@@ -12,7 +12,7 @@ export const addtoCart = async function(req,res){
                 message:"All field are required"
             })
         }
-        const response  = await Cart.findOne({product})
+        const response  = await Cart.findOne({product,user})
         console.log(" response ",response);
         if(response){
             return res.status(200).json({
