@@ -22,3 +22,27 @@
         console.log("on the middleware error",error.message);
      }
  } 
+
+
+  export const Admin = async function(req,res,next){
+   try {
+      if(req.profile.role === 0){
+         return res.status(403).json({
+            sucess:false,
+            message:"You are Admin Acess Denied",
+         
+         })
+
+
+      }
+
+      next()
+   } catch (error) {
+      console.log("error on admin middleware",error.message);
+      return res.status(400).json({
+         sucess:false,
+         message:"error on admin middleware",
+         data:error.message
+      })
+   }
+  }

@@ -1,8 +1,6 @@
 
 
 
-
-
 import dotenv from 'dotenv';
 import Razorpay from 'razorpay';
 import {Payment} from "../Models/PaymentSchema.js"
@@ -44,7 +42,7 @@ export const checkout = async function(req,res){
             paystatus:"Created"
         })
     } catch (error) {
-        console.log("error on payment checkout",error.mesaage);
+        console.log("error on payment checkout",error);
         res.status(400).json({
             sucess:false,
             message:"error on checkout payment",

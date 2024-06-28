@@ -16,7 +16,7 @@ ProductRoute.route('/addProduct').post(
     addProduct
   );
   
-ProductRoute.route('/getProduct').get(verifyJwt,getProduct)
-ProductRoute.route('/getProductDetail').post(verifyJwt,getProductDetail)
+ProductRoute.route('/getProduct').get(getProduct)
+ProductRoute.route('/getProductDetail').post(getProductDetail)
 
 export {ProductRoute}

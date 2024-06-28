@@ -10,6 +10,7 @@ import { CartRouter } from "./Router/CartRouter.js";
 import { AddressRouter } from "./Router/AddressRouter.js";
 import { OrderRouter } from "./Router/OrderRouter.js";
 import { PaymentRouter } from "./Router/PaymentRouter.js";
+import { verifyJwt } from "./Middleware/Auth.js";
 
 
 
@@ -31,8 +32,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/v1/product", ProductRoute);
 app.use('/v1/user', UserRouter);
+app.use("/v1/product", ProductRoute);
 app.use('/v1/proudctdetail',CartRouter)
 app.use('/v1/address',AddressRouter),
 app.use('/v1/order',OrderRouter)
