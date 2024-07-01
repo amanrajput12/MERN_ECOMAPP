@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT ||8000 ; // 
 dotenv.config();
 app.use(cors({
-  origin: 'https://onlineecomapp.netlify.app', // Replace with your frontend's domain
+  origin: 'https://shoppingwebapplication.vercel.app/', // Replace with your frontend's domain
   credentials: true
 }));
 console.log(process.env.key_Id);
