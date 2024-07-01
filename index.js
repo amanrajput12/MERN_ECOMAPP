@@ -27,10 +27,7 @@ app.use(express.static('Public'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+
 
 app.use('/v1/user', UserRouter);
 app.use("/v1/product", ProductRoute);
