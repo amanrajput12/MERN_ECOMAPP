@@ -3,30 +3,38 @@ import { Order } from "../Models/OrderSchema.js";
 
 export const CreateOrder = async function(req,res){
     try {
-        const {address,paymentMethod,products,orderquantity,user}= req.body
+        const {address,paymentMethod,products,orderquantity,user,BillAmount,BillStatus,_id}= req.body
        
        
 
         //  console.log("req header for cookies",req.Cookie);
 
-        console.log(user,address,paymentMethod,products,orderquantity);
-        if(!(user,address,paymentMethod,products)){
+        console.log(user,address,paymentMethod,products,orderquantity,BillAmount,BillStatus,_id);
+        if(!(user,address,paymentMethod,products,BillAmount,BillStatus)){
             return res.status(400).json({
                 sucess:false,
                 message:"All field are required"
             })
         }
+       
         const response = await Order.create({
             user,
             address,
             paymentMethod,
             products,
-            orderquantity
+            orderquantity,
+            BillAmount,
+            BillStatus,
+            paymentId:_id
         })
+
+        const orders = await Order.find({user}).populate('address').populate('products')
+        console.log("order are",orders);
         res.status(201).json({
             sucess:true,
             message:"Order created Sucessfully",
-            data:response
+            data:response,
+            order:orders
         })
 
     } catch (error) {
@@ -47,7 +55,7 @@ export const GetOrders = async function(req,res){
         const {user} = req.body
     
 
-        // console.log("req header for cookies",req.Cookie);
+       
         if(!user){
             return res.status(400).json({
                 sucess:false,
@@ -59,7 +67,7 @@ export const GetOrders = async function(req,res){
         res.status(200).json({
             sucess:true,
             message:"sucessfully geting orders",
-            data:orders
+            order:orders
         })
     } catch (error) {
         console.log("error on getting orders",error.message);

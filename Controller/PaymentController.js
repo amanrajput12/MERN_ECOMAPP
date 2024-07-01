@@ -24,7 +24,7 @@ export const checkout = async function(req,res){
     try {
         const {amount,cartItems,userShipping,userId} = req.body
       
-
+           console.log("checkout",amount,typeof(amount));
         // console.log("req header for cookies",req.Cookie);
 
         var options = {

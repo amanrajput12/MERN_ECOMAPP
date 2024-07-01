@@ -30,7 +30,19 @@ const OrderSchema = new mongoose.Schema({
             type:mongoose.Schema.ObjectId,
             ref:"Product"
         }
-    ]
+    ],
+    BillAmount:{
+      type:Number
+    },
+    BillStatus:{
+        type:String
+    },
+    paymentId:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Payment"
+    }
+},{
+    timestamps:true
 })
 
 const Order = mongoose.model("Order",OrderSchema)
