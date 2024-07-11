@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import jsonwebtoken from "jsonwebtoken"
 export const Signup = async function(req,res){
     try {
-        console.log("req header for cookies",req.Cookie,req.header);
+        console.log("req header for cookies",req.header);
         const {userName,password,email}= req.body
         if(!(userName,password,email)){
             res.status(401).json({
@@ -13,7 +13,7 @@ export const Signup = async function(req,res){
         }
         const existingUser = await User.findOne({email})
         if(existingUser){
-            res.status(401).json({
+          return   res.status(401).json({
                 message:"User already exist in db"
             })
         }
@@ -32,10 +32,7 @@ export const Signup = async function(req,res){
 
         await  newUser.save()
         newUser.password =undefined
-        res.cookie('token',token,{
-          
-            maxAge: 2 * 60 * 60 * 1000 
-        })
+       
         res.status(201).json({
             sucess:true,
             message:"user created sucessfully",
