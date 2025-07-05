@@ -17,10 +17,24 @@ import { verifyJwt } from "./Middleware/Auth.js";
 const app = express();
 const port = process.env.PORT ||8000 ; // 
 dotenv.config();
+
+const allowedOrigins = [
+  'https://shoppingwebapplication.vercel.app',
+  'https://www.tryonics.shop'
+];
+
+
 app.use(cors({
-  origin: 'https://shoppingwebapplication.vercel.app',
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 console.log(process.env.key_Id);
 app.use(express.json());
 app.use(express.static('Public'))
